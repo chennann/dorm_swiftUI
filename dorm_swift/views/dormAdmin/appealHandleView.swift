@@ -12,7 +12,7 @@ struct appealHandleView: View {
     @EnvironmentObject var loginManager: LoginManager
     @EnvironmentObject var sharedModel: SharedModel
     
-    @State var appeals: [AppealHandle] = [AppealHandle(id: 1, studentUserName: "", studentNumber: "", checkTime: "", checkReason: "", checkValue: 0, checker: "", status: "")]
+    @State var appeals: [AppealHandle] = [AppealHandle(id: 1, studentUserName: "", studentNumber: "", checkTime: "", checkReason: "", checkValue: 1, checker: "", status: "")]
     
     @State private var loginResponse: Response<String?>?
     @State private var errorMessage: String?
@@ -192,10 +192,10 @@ struct appealHandleView: View {
                                 print("Left swipe action on \(appeals[index].id)")
                                 approve(id: appeals[index].id)
                                 appeals[index].showDetail = false
+                                appeals.remove(at: index)
                                 appealList()
                             } label: {
                                 Label("同意", systemImage: "checkmark")
-                                
                             }
                             .tint(.green)
                         }
@@ -204,6 +204,7 @@ struct appealHandleView: View {
                                 print("Right swipe action on \(appeals[index].id)")
                                 reject(id: appeals[index].id)
                                 appeals[index].showDetail = false
+                                appeals.remove(at: index)
                                 appealList()
                             } label: {
                                 Label("拒绝", systemImage: "xmark")
