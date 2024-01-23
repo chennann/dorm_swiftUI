@@ -123,35 +123,58 @@ struct checkDetail: View {
                     Spacer()
                 }
                 .padding(.horizontal, 30)
-                TextField((check.status != "已扣分") ? "当前状态不可申诉" : "申诉原因", text: $appealReason) // 绑定到inputText
-                    .padding()
-                    .background(Color.white) // 设置背景色
-                    .cornerRadius(5) // 设置圆角
-                    .shadow(radius: 5) // 设置阴影
-                    .padding(.horizontal, 30) // 设置水平填充
-                    .disabled(check.status != "已扣分")
                 
-                Button {
-                    self.showCamera = true
-                } label: {
-                    if appealUrl == nil {
-                        Image(systemName: "camera.viewfinder")
-                            .font(.system(size: 60))
-                            .foregroundColor(Color.gray)
-                    }
-                    else {
-                        AsyncImage(url: URL(string: appealUrl ?? "https://roy064.oss-cn-shanghai.aliyuncs.com/library/75694086-f111-4c5b-ad7c-f2bff521c302.png")) { image in
-                            image.resizable()
-                                .aspectRatio(contentMode: .fit)
-                        } placeholder: {
-                            ProgressView()
+                
+                
+                
+                if check.status != "已扣分" {
+                    RoundedRectangle(cornerRadius: 8)
+                        .fill(Color.gray.opacity(0.2))
+                        .frame(width: 350, height: 150)
+                        .overlay {
+                            Text(check.appealReason ?? "")
+                                .foregroundColor(Color.black)
+                                .font(.system(size: 20))
                         }
-                        .frame(width: 150, height: 150)
-                        .shadow(radius: 10) // 设置阴影
+                    AsyncImage(url: URL(string: check.appealImg ?? "https://roy064.oss-cn-shanghai.aliyuncs.com/library/75694086-f111-4c5b-ad7c-f2bff521c302.png")) { image in
+                        image.resizable()
+                            .aspectRatio(contentMode: .fit)
+                    } placeholder: {
+                        ProgressView()
                     }
-                    
+                    .frame(width: 150, height: 150)
+                    .shadow(radius: 10) // 设置阴影
                 }
-                .padding(.top)
+                else {
+                    TextField((check.status != "已扣分") ? "当前状态不可申诉" : "申诉原因", text: $appealReason) // 绑定到inputText
+                        .padding()
+                        .background(Color.white) // 设置背景色
+                        .cornerRadius(5) // 设置圆角
+                        .shadow(radius: 5) // 设置阴影
+                        .padding(.horizontal, 30) // 设置水平填充
+                        .disabled(check.status != "已扣分")
+                    Button {
+                        self.showCamera = true
+                    } label: {
+                        if appealUrl == nil {
+                            Image(systemName: "camera.viewfinder")
+                                .font(.system(size: 60))
+                                .foregroundColor(Color.gray)
+                        }
+                        else {
+                            AsyncImage(url: URL(string: appealUrl ?? "https://roy064.oss-cn-shanghai.aliyuncs.com/library/75694086-f111-4c5b-ad7c-f2bff521c302.png")) { image in
+                                image.resizable()
+                                    .aspectRatio(contentMode: .fit)
+                            } placeholder: {
+                                ProgressView()
+                            }
+                            .frame(width: 150, height: 150)
+                            .shadow(radius: 10) // 设置阴影
+                        }
+                        
+                    }
+                    .padding(.top)
+                }
                 
                 Spacer()
             }

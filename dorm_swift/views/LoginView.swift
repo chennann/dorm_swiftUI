@@ -168,6 +168,8 @@ struct LoginView: View {
             case .success(let response):
                 if response.code == 1 {
                     loginManager.role = userRoles[response.data.role] ?? "dormAdmin"
+                    loginManager.userPic = response.data.userPic
+                    loginManager.nickname = response.data.nickname
                 }
                 else {
                     str = response.msg

@@ -37,20 +37,35 @@ struct TopView: View {
                     showUser = true;
                 }) {
                     
-                    if (loginManager.role == "dormAdmin") {
-                        Image(systemName: "person.badge.key.fill")
-                            .font(.system(size: 30))
-                            .frame(width: 40, height: 40)
-                            .foregroundColor(Color.white.opacity(0.6))
-                            .padding(.trailing, 5)
+                    if (UserDefaults.standard.string(forKey: "userPic") != "default") && (UserDefaults.standard.string(forKey: "userPic") != "") {
+                        AsyncImage(url: URL(string: UserDefaults.standard.string(forKey: "userPic") ?? "https://roy064.oss-cn-shanghai.aliyuncs.com/library/75694086-f111-4c5b-ad7c-f2bff521c302.png")) { image in
+                            image.resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .clipShape(Circle())
+                                .overlay(Circle().stroke(Color.white, lineWidth: 2))
+                        } placeholder: {
+                            ProgressView()
+                        }
+                        .frame(width: 35, height: 35)
                     }
                     else {
-                        Image(systemName: "person.fill")
-                            .font(.system(size: 30))
-                            .frame(width: 40, height: 40)
-                            .foregroundColor(Color.white.opacity(0.6))
-                            .padding(.trailing, 5)
+                        if (loginManager.role == "dormAdmin") {
+                            Image(systemName: "person.badge.key.fill")
+                                .font(.system(size: 30))
+                                .frame(width: 40, height: 40)
+                                .foregroundColor(Color.white.opacity(0.6))
+                                .padding(.trailing, 5)
+                        }
+                        else {
+                            Image(systemName: "person.fill")
+                                .font(.system(size: 30))
+                                .frame(width: 40, height: 40)
+                                .foregroundColor(Color.white.opacity(0.6))
+                                .padding(.trailing, 5)
+                        }
                     }
+                    
+                    
                     
                     
                 }
@@ -58,9 +73,10 @@ struct TopView: View {
                     ProfileView()
                 }
             }
+            .padding(.top, 5)
         }
         .padding(.horizontal, 20)
-        .padding(.bottom, 8)
+        .padding(.bottom, 5)
         .background(Color("Top_color"))
     }
 }

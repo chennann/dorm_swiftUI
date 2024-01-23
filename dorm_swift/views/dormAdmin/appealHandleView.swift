@@ -12,7 +12,7 @@ struct appealHandleView: View {
     @EnvironmentObject var loginManager: LoginManager
     @EnvironmentObject var sharedModel: SharedModel
     
-    @State var appeals: [AppealHandle] = [AppealHandle(id: 1, studentUserName: "", studentNumber: "", checkTime: "", checkReason: "", checkValue: 1, checker: "", status: "")]
+    @State var appeals: [AppealHandle] = [AppealHandle(id: 1, studentUserName: "", studentNumber: "", checkTime: "", checkReason: "", checkValue: 1, checker: "", status: ""), AppealHandle(id: 1, studentUserName: "", studentNumber: "", checkTime: "", checkReason: "", checkValue: 2, checker: "", status: ""), AppealHandle(id: 1, studentUserName: "", studentNumber: "", checkTime: "", checkReason: "", checkValue: 1, checker: "", status: "")]
     
     @State private var loginResponse: Response<String?>?
     @State private var errorMessage: String?
@@ -24,195 +24,200 @@ struct appealHandleView: View {
     
     var body: some View {
         VStack {
-            HStack {
-                Text("待处理申诉")
-                    .bold()
-                    .font(.system(size: 40))
-                Spacer()
-            }
-            .padding()
-            
-            if appeals.count == 0 {
-                Spacer()
-                VStack {
-                    Image(systemName: "checkmark.circle")
-                        .foregroundColor(.green)
-                        .font(.system(size: 130))
-                        .padding()
-                    Text("👉没有待处理的申诉👈")
-                    .bold()
-                    .font(.system(size: 30))
-                }
-                .padding(.bottom, 90)
-                Spacer()
+            if isloading {
+                ProgressView()
             }
             else {
-                List {
-                    ForEach(appeals.indices, id: \.self) { index in
-                        VStack(alignment: .center, spacing: 5) {
-                            
-                            HStack {
-                                Text("\(appeals[index].studentUserName)")
-                                Spacer()
-                                Text("\(appeals[index].studentNumber)")
-                            }
-                            .font(.system(size: 25))
-                            .bold()
-                            .padding(.horizontal, 30)
-                            
-                            HStack {
-                                Text("\(stringMapInitialized[appeals[index].checkReason] ?? "")扣\(appeals[index].checkValue)分")
-                            }
-                            .font(.system(size: 30))
-                            Text("\(appeals[index].checkTime)")
-                            HStack {
-                                Text("\(appeals[index].status)...")
-                                    .italic()
-                                    .foregroundStyle(Color.gray)
-                                Spacer()
-                                Button {
-                                    withAnimation {
-                                        appeals[index].showDetail.toggle()
-                                    }
-                                } label: {
-                                    Text("details")
-                                        .foregroundStyle(Color.gray)
+                HStack {
+                    Text("待处理申诉")
+                        .bold()
+                        .font(.system(size: 40))
+                    Spacer()
+                }
+                .padding()
+                
+                if appeals.count == 0 {
+                    Spacer()
+                    VStack {
+                        Image(systemName: "checkmark.circle")
+                            .foregroundColor(.green)
+                            .font(.system(size: 130))
+                            .padding()
+                        Text("👉没有待处理的申诉👈")
+                        .bold()
+                        .font(.system(size: 30))
+                    }
+                    .padding(.bottom, 90)
+                    Spacer()
+                }
+                else {
+                    List {
+                        ForEach(appeals.indices, id: \.self) { index in
+                            VStack(alignment: .center, spacing: 5) {
+                                
+                                HStack {
+                                    Text("\(appeals[index].studentUserName)")
+                                    Spacer()
+                                    Text("\(appeals[index].studentNumber)")
                                 }
-                                .popover(isPresented: $appeals[index].showDetail) {
-                                    
-                                    HStack {
-                                        Spacer()
-                                        Text("📄申诉详情📄")
-                                            .bold()
-                                            .font(.system(size: 40))
-                                            .padding()
-                                        Spacer()
+                                .font(.system(size: 25))
+                                .bold()
+                                .padding(.horizontal, 30)
+                                
+                                HStack {
+                                    Text("\(stringMapInitialized[appeals[index].checkReason] ?? "")扣\(appeals[index].checkValue)分")
+                                }
+                                .font(.system(size: 30))
+                                Text("\(appeals[index].checkTime)")
+                                HStack {
+                                    Text("\(appeals[index].status)...")
+                                        .italic()
+                                        .foregroundStyle(Color.gray)
+                                    Spacer()
+                                    Button {
+                                        withAnimation {
+                                            appeals[index].showDetail.toggle()
+                                        }
+                                    } label: {
+                                        Text("details")
+                                            .foregroundStyle(Color.gray)
                                     }
-                                    Divider()
-                                    ScrollView {
-                                        // 详细信息视图
-                                        VStack(alignment: .leading, spacing: 10) {
-                                    
-                                            Text("扣分信息：")
+                                    .popover(isPresented: $appeals[index].showDetail) {
+                                        
+                                        HStack {
+                                            Spacer()
+                                            Text("📄申诉详情📄")
                                                 .bold()
-                                                .font(.system(size: 30))
-                                            Text("\(stringMapInitialized[appeals[index].checkReason] ?? "")扣\(appeals[index].checkValue)分")
-                                                .font(.system(size: 20))
-                                            HStack {
-                                                Spacer()
-                                                AsyncImage(url: URL(string: appeals[index].checkImg ?? "https://roy064.oss-cn-shanghai.aliyuncs.com/library/75694086-f111-4c5b-ad7c-f2bff521c302.png")) { image in
-                                                    image.resizable()
-                                                        .aspectRatio(contentMode: .fit)
-                                                } placeholder: {
-                                                    ProgressView()
-                                                }
-                                                .frame(width: 350, height: 350)
-                                                Spacer()
-                                            }
-                                            Divider()
-                                            Text("申诉信息：")
-                                                .bold()
-                                                .font(.system(size: 30))
-                                            HStack {
-                                                Spacer()
-                                                RoundedRectangle(cornerRadius: 8)
-                                                    .fill(Color.gray.opacity(0.2))
-                                                    .frame(width: 350, height: 150)
-                                                    .overlay {
-                                                        Text(appeals[index].appealReason ?? "")
-                                                            .foregroundColor(Color.black)
-                                                            .font(.system(size: 20))
+                                                .font(.system(size: 40))
+                                                .padding()
+                                            Spacer()
+                                        }
+                                        Divider()
+                                        ScrollView {
+                                            // 详细信息视图
+                                            VStack(alignment: .leading, spacing: 10) {
+                                        
+                                                Text("扣分信息：")
+                                                    .bold()
+                                                    .font(.system(size: 30))
+                                                Text("\(stringMapInitialized[appeals[index].checkReason] ?? "")扣\(appeals[index].checkValue)分")
+                                                    .font(.system(size: 20))
+                                                HStack {
+                                                    Spacer()
+                                                    AsyncImage(url: URL(string: appeals[index].checkImg ?? "https://roy064.oss-cn-shanghai.aliyuncs.com/library/75694086-f111-4c5b-ad7c-f2bff521c302.png")) { image in
+                                                        image.resizable()
+                                                            .aspectRatio(contentMode: .fit)
+                                                    } placeholder: {
+                                                        ProgressView()
                                                     }
-                                                Spacer()
-                                            }
-                                            
-                                            HStack {
-                                                Spacer()
-                                                AsyncImage(url: URL(string: appeals[index].appealImg ?? "https://roy064.oss-cn-shanghai.aliyuncs.com/library/75694086-f111-4c5b-ad7c-f2bff521c302.png")) { image in
-                                                    image.resizable()
-                                                        .aspectRatio(contentMode: .fit)
-                                                } placeholder: {
-                                                    ProgressView()
+                                                    .frame(width: 350, height: 350)
+                                                    Spacer()
                                                 }
-                                                .frame(width: 350, height: 350)
-                                                Spacer()
-                                            }
-                                            Divider()
-                                            HStack {
-                                                Spacer()
-                                                Button {
-                                                    reject(id: appeals[index].id)
-                                                    appeals[index].showDetail = false
-                                                    appealList()
-                                                } label: {
-                                                    RoundedRectangle(cornerRadius: 10)
-                                                        .fill(Color.red)
-                                                        .frame(width: 150, height: 50)
+                                                Divider()
+                                                Text("申诉信息：")
+                                                    .bold()
+                                                    .font(.system(size: 30))
+                                                HStack {
+                                                    Spacer()
+                                                    RoundedRectangle(cornerRadius: 8)
+                                                        .fill(Color.gray.opacity(0.2))
+                                                        .frame(width: 350, height: 150)
                                                         .overlay {
-                                                            Text("拒绝🙅")
-                                                                .foregroundColor(Color.white)
-                                                                .bold()
-                                                                .font(.system(size: 18))
+                                                            Text(appeals[index].appealReason ?? "")
+                                                                .foregroundColor(Color.black)
+                                                                .font(.system(size: 20))
                                                         }
+                                                    Spacer()
                                                 }
                                                 
-                                                Button {
-                                                    approve(id: appeals[index].id)
-                                                    appeals[index].showDetail = false
-                                                    appealList()
-                                                } label: {
-                                                    RoundedRectangle(cornerRadius: 10)
-                                                        .fill(Color.green)
-                                                        .frame(width: 150, height: 50)
-                                                        .overlay {
-                                                            Text("同意🙆")
-                                                                .foregroundColor(Color.white)
-                                                                .bold()
-                                                                .font(.system(size: 18))
-                                                        }
+                                                HStack {
+                                                    Spacer()
+                                                    AsyncImage(url: URL(string: appeals[index].appealImg ?? "https://roy064.oss-cn-shanghai.aliyuncs.com/library/75694086-f111-4c5b-ad7c-f2bff521c302.png")) { image in
+                                                        image.resizable()
+                                                            .aspectRatio(contentMode: .fit)
+                                                    } placeholder: {
+                                                        ProgressView()
+                                                    }
+                                                    .frame(width: 350, height: 350)
+                                                    Spacer()
                                                 }
+                                                Divider()
+                                                HStack {
+                                                    Spacer()
+                                                    Button {
+                                                        reject(id: appeals[index].id)
+                                                        appeals[index].showDetail = false
+                                                        appealList()
+                                                    } label: {
+                                                        RoundedRectangle(cornerRadius: 10)
+                                                            .fill(Color.red)
+                                                            .frame(width: 150, height: 50)
+                                                            .overlay {
+                                                                Text("拒绝🙅")
+                                                                    .foregroundColor(Color.white)
+                                                                    .bold()
+                                                                    .font(.system(size: 18))
+                                                            }
+                                                    }
+                                                    
+                                                    Button {
+                                                        approve(id: appeals[index].id)
+                                                        appeals[index].showDetail = false
+                                                        appealList()
+                                                    } label: {
+                                                        RoundedRectangle(cornerRadius: 10)
+                                                            .fill(Color.green)
+                                                            .frame(width: 150, height: 50)
+                                                            .overlay {
+                                                                Text("同意🙆")
+                                                                    .foregroundColor(Color.white)
+                                                                    .bold()
+                                                                    .font(.system(size: 18))
+                                                            }
+                                                    }
+                                                    Spacer()
+                                                }
+                                                
                                                 Spacer()
+                                                
                                             }
-                                            
-                                            Spacer()
-                                            
+                                            .padding()
                                         }
-                                        .padding()
+                                        
                                     }
-                                    
                                 }
+                                .padding(.horizontal, 20)
+                                
                             }
-                            .padding(.horizontal, 20)
                             
-                        }
-                        
-                        
-                        .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-                            Button {
-                                print("Left swipe action on \(appeals[index].id)")
-                                approve(id: appeals[index].id)
-                                appeals[index].showDetail = false
-                                appeals.remove(at: index)
-                                appealList()
-                            } label: {
-                                Label("同意", systemImage: "checkmark")
+                            
+                            .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                                Button {
+                                    print("Left swipe action on \(appeals[index].id)")
+                                    approve(id: appeals[index].id)
+                                    appeals[index].showDetail = false
+                                    appeals.remove(at: index)
+                                    appealList()
+                                } label: {
+                                    Label("同意", systemImage: "checkmark")
+                                }
+                                .tint(.green)
                             }
-                            .tint(.green)
-                        }
-                        .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-                            Button {
-                                print("Right swipe action on \(appeals[index].id)")
-                                reject(id: appeals[index].id)
-                                appeals[index].showDetail = false
-                                appeals.remove(at: index)
-                                appealList()
-                            } label: {
-                                Label("拒绝", systemImage: "xmark")
+                            .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                                Button {
+                                    print("Right swipe action on \(appeals[index].id)")
+                                    reject(id: appeals[index].id)
+                                    appeals[index].showDetail = false
+                                    appeals.remove(at: index)
+                                    appealList()
+                                } label: {
+                                    Label("拒绝", systemImage: "xmark")
+                                }
+                                .tint(.red)
                             }
-                            .tint(.red)
                         }
+                        .onDelete(perform: delete)
                     }
-                    .onDelete(perform: delete)
                 }
             }
             

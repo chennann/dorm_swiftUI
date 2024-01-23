@@ -9,6 +9,16 @@ import SwiftUI
 
 class LoginManager: ObservableObject {
     
+    @Published var nickname: String {
+        didSet {
+            UserDefaults.standard.set(nickname, forKey: "nickname")
+        }
+    }
+    @Published var userPic: String {
+        didSet {
+            UserDefaults.standard.set(userPic, forKey: "userPic")
+        }
+    }
     @Published var username: String {
         didSet {
             UserDefaults.standard.set(username, forKey: "username")
@@ -34,6 +44,8 @@ class LoginManager: ObservableObject {
         self.token = UserDefaults.standard.string(forKey: "authToken") ?? "default"
         self.role = UserDefaults.standard.string(forKey: "role") ?? "default"
         self.username = UserDefaults.standard.string(forKey: "username") ?? "default"
+        self.userPic = UserDefaults.standard.string(forKey: "userPic") ?? "default"
+        self.nickname = UserDefaults.standard.string(forKey: "nickname") ?? "default"
     }
     
     func logout () {
@@ -41,6 +53,8 @@ class LoginManager: ObservableObject {
         token = ""
         role = ""
         username = ""
+        userPic = ""
+        nickname = ""
     }
 }
 
