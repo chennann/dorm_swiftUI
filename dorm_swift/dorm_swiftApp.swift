@@ -14,6 +14,7 @@ struct dorm_swiftApp: App {
     var body: some Scene {
         WindowGroup {
             MainView()
+                .enableToast()
                 .environmentObject(loginManager)
                 .environmentObject(sharedModel)
         }

@@ -205,6 +205,7 @@ struct checkDetail: View {
         Button {
             withAnimation {
                 addAppeal()
+                showToast(content: "⏫申诉已提交")
                 self.presentationMode.wrappedValue.dismiss()
             }
         } label: {

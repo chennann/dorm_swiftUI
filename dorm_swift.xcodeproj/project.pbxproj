@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		67D5D38A78AE96A81C51AE83 /* Pods_dorm_swift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09EE4B1FAC5AFFFD4CFF4599 /* Pods_dorm_swift.framework */; };
 		8F1A8EE12B58C6F900117816 /* dorm_swiftApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1A8EE02B58C6F900117816 /* dorm_swiftApp.swift */; };
 		8F1A8EE32B58C6F900117816 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1A8EE22B58C6F900117816 /* ContentView.swift */; };
 		8F1A8EE52B58C6FA00117816 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8F1A8EE42B58C6FA00117816 /* Assets.xcassets */; };
@@ -17,6 +18,7 @@
 		8F1A8EF92B58C7F900117816 /* SharedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1A8EF82B58C7F900117816 /* SharedModel.swift */; };
 		8F1A8EFB2B58CF5B00117816 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1A8EFA2B58CF5B00117816 /* NetworkService.swift */; };
 		8F1A8EFD2B58D03300117816 /* CheckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1A8EFC2B58D03300117816 /* CheckView.swift */; };
+		8F58E3CC2B60C4E8005D07D6 /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F58E3CB2B60C4E8005D07D6 /* Toast.swift */; };
 		8FEF58362B59159D00518BAD /* checkList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FEF58352B59159D00518BAD /* checkList.swift */; };
 		8FEF58382B5915A800518BAD /* student_me.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FEF58372B5915A800518BAD /* student_me.swift */; };
 		8FEF583A2B5918BD00518BAD /* appealHandleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FEF58392B5918BD00518BAD /* appealHandleView.swift */; };
@@ -38,6 +40,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		09EE4B1FAC5AFFFD4CFF4599 /* Pods_dorm_swift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_dorm_swift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F1A8EDD2B58C6F900117816 /* dorm_swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = dorm_swift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F1A8EE02B58C6F900117816 /* dorm_swiftApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dorm_swiftApp.swift; sourceTree = "<group>"; };
 		8F1A8EE22B58C6F900117816 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -49,6 +52,7 @@
 		8F1A8EF82B58C7F900117816 /* SharedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedModel.swift; sourceTree = "<group>"; };
 		8F1A8EFA2B58CF5B00117816 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		8F1A8EFC2B58D03300117816 /* CheckView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckView.swift; sourceTree = "<group>"; };
+		8F58E3CB2B60C4E8005D07D6 /* Toast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
 		8FEF58352B59159D00518BAD /* checkList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = checkList.swift; sourceTree = "<group>"; };
 		8FEF58372B5915A800518BAD /* student_me.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = student_me.swift; sourceTree = "<group>"; };
 		8FEF58392B5918BD00518BAD /* appealHandleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = appealHandleView.swift; sourceTree = "<group>"; };
@@ -67,6 +71,8 @@
 		8FEF58542B5A266300518BAD /* checkDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = checkDetail.swift; sourceTree = "<group>"; };
 		8FEF58562B5A4DF100518BAD /* KeyboardManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardManager.swift; sourceTree = "<group>"; };
 		8FEF58582B5A51CE00518BAD /* Appeal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appeal.swift; sourceTree = "<group>"; };
+		ABAFFB8C44A81822CE510105 /* Pods-dorm_swift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-dorm_swift.debug.xcconfig"; path = "Target Support Files/Pods-dorm_swift/Pods-dorm_swift.debug.xcconfig"; sourceTree = "<group>"; };
+		B29C2AEBD648AE790A2DE0AE /* Pods-dorm_swift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-dorm_swift.release.xcconfig"; path = "Target Support Files/Pods-dorm_swift/Pods-dorm_swift.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,17 +80,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				67D5D38A78AE96A81C51AE83 /* Pods_dorm_swift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		09764B6283AC19F4A45CEA64 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				ABAFFB8C44A81822CE510105 /* Pods-dorm_swift.debug.xcconfig */,
+				B29C2AEBD648AE790A2DE0AE /* Pods-dorm_swift.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		1D72C8AD9EA7D909138AAAA9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				09EE4B1FAC5AFFFD4CFF4599 /* Pods_dorm_swift.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		8F1A8ED42B58C6F900117816 = {
 			isa = PBXGroup;
 			children = (
 				8F1A8EDF2B58C6F900117816 /* dorm_swift */,
 				8F1A8EDE2B58C6F900117816 /* Products */,
+				09764B6283AC19F4A45CEA64 /* Pods */,
+				1D72C8AD9EA7D909138AAAA9 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -143,6 +169,7 @@
 				8F1A8EFA2B58CF5B00117816 /* NetworkService.swift */,
 				8F1A8EF82B58C7F900117816 /* SharedModel.swift */,
 				8FEF58502B59926300518BAD /* DataExtensions.swift */,
+				8F58E3CB2B60C4E8005D07D6 /* Toast.swift */,
 			);
 			path = utils;
 			sourceTree = "<group>";
@@ -186,9 +213,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8F1A8EEB2B58C6FA00117816 /* Build configuration list for PBXNativeTarget "dorm_swift" */;
 			buildPhases = (
+				380B265EF82E601FCB5CD8F9 /* [CP] Check Pods Manifest.lock */,
 				8F1A8ED92B58C6F900117816 /* Sources */,
 				8F1A8EDA2B58C6F900117816 /* Frameworks */,
 				8F1A8EDB2B58C6F900117816 /* Resources */,
+				BBBF1E02E87E78DC79E0CF32 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -244,6 +273,48 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		380B265EF82E601FCB5CD8F9 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-dorm_swift-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BBBF1E02E87E78DC79E0CF32 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-dorm_swift/Pods-dorm_swift-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-dorm_swift/Pods-dorm_swift-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-dorm_swift/Pods-dorm_swift-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		8F1A8ED92B58C6F900117816 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -265,6 +336,7 @@
 				8FEF58552B5A266300518BAD /* checkDetail.swift in Sources */,
 				8FEF58592B5A51CE00518BAD /* Appeal.swift in Sources */,
 				8FEF58492B5968B800518BAD /* ProfileView.swift in Sources */,
+				8F58E3CC2B60C4E8005D07D6 /* Toast.swift in Sources */,
 				8FEF584B2B59745200518BAD /* DormAndStudent.swift in Sources */,
 				8F1A8EF32B58C7C500117816 /* LoginManager.swift in Sources */,
 				8FEF58572B5A4DF100518BAD /* KeyboardManager.swift in Sources */,
@@ -402,6 +474,7 @@
 		};
 		8F1A8EEC2B58C6FA00117816 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = ABAFFB8C44A81822CE510105 /* Pods-dorm_swift.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -410,6 +483,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"dorm_swift/Preview Content\"";
 				DEVELOPMENT_TEAM = 25FSCU2Q7D;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "轻舍查房";
 				INFOPLIST_KEY_NSCameraUsageDescription = "此应用需要使用相机来拍摄照片";
@@ -433,6 +507,7 @@
 		};
 		8F1A8EED2B58C6FA00117816 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B29C2AEBD648AE790A2DE0AE /* Pods-dorm_swift.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -441,6 +516,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"dorm_swift/Preview Content\"";
 				DEVELOPMENT_TEAM = 25FSCU2Q7D;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "轻舍查房";
 				INFOPLIST_KEY_NSCameraUsageDescription = "此应用需要使用相机来拍摄照片";

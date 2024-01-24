@@ -12,7 +12,8 @@ struct appealHandleView: View {
     @EnvironmentObject var loginManager: LoginManager
     @EnvironmentObject var sharedModel: SharedModel
     
-    @State var appeals: [AppealHandle] = [AppealHandle(id: 1, studentUserName: "", studentNumber: "", checkTime: "", checkReason: "", checkValue: 1, checker: "", status: ""), AppealHandle(id: 1, studentUserName: "", studentNumber: "", checkTime: "", checkReason: "", checkValue: 2, checker: "", status: ""), AppealHandle(id: 1, studentUserName: "", studentNumber: "", checkTime: "", checkReason: "", checkValue: 1, checker: "", status: "")]
+//    @State var appeals: [AppealHandle] = [AppealHandle(id: 1, studentUserName: "", studentNumber: "", checkTime: "", checkReason: "", checkValue: 1, checker: "", status: ""), AppealHandle(id: 1, studentUserName: "", studentNumber: "", checkTime: "", checkReason: "", checkValue: 2, checker: "", status: ""), AppealHandle(id: 1, studentUserName: "", studentNumber: "", checkTime: "", checkReason: "", checkValue: 1, checker: "", status: "")]
+    @State var appeals: [AppealHandle] = []
     
     @State private var loginResponse: Response<String?>?
     @State private var errorMessage: String?
@@ -79,7 +80,7 @@ struct appealHandleView: View {
                                             appeals[index].showDetail.toggle()
                                         }
                                     } label: {
-                                        Text("details")
+                                        Text("查看详情")
                                             .foregroundStyle(Color.gray)
                                     }
                                     .popover(isPresented: $appeals[index].showDetail) {
@@ -191,32 +192,34 @@ struct appealHandleView: View {
                             }
                             
                             
-                            .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                            .swipeActions(edge: .leading, allowsFullSwipe: true) {
                                 Button {
                                     print("Left swipe action on \(appeals[index].id)")
                                     approve(id: appeals[index].id)
                                     appeals[index].showDetail = false
                                     appeals.remove(at: index)
                                     appealList()
+                                    showToast(content: "🙆操作成功")
                                 } label: {
                                     Label("同意", systemImage: "checkmark")
                                 }
                                 .tint(.green)
                             }
-                            .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                            .swipeActions(edge: .leading, allowsFullSwipe: true) {
                                 Button {
                                     print("Right swipe action on \(appeals[index].id)")
                                     reject(id: appeals[index].id)
                                     appeals[index].showDetail = false
                                     appeals.remove(at: index)
                                     appealList()
+                                    showToast(content: "🙅拒绝成功")
                                 } label: {
                                     Label("拒绝", systemImage: "xmark")
                                 }
                                 .tint(.red)
                             }
                         }
-                        .onDelete(perform: delete)
+//                        .onDelete(perform: delete)
                     }
                 }
             }
@@ -228,13 +231,13 @@ struct appealHandleView: View {
     }
     
     func reject (id: Int) {
-        withAnimation(nil) {
-            isloading = true
-        }
+//        withAnimation(nil) {
+//            isloading = true
+//        }
         
         let networkService = NetworkService()
         networkService.rejectService(appeal: AppealHandleSend(id: id)) { result in
-            defer { isloading = false }
+            defer { appealList() }
             switch result {
             case .success(let response):
                 print(response.msg)
@@ -246,13 +249,13 @@ struct appealHandleView: View {
     }
     
     func approve (id: Int) {
-        withAnimation(nil) {
-            isloading = true
-        }
+//        withAnimation(nil) {
+//            isloading = true
+//        }
         
         let networkService = NetworkService()
         networkService.approveService(appeal: AppealHandleSend(id: id)) { result in
-            defer { isloading = false }
+            defer { appealList() }
             switch result {
             case .success(let response):
                 print(response.msg)
@@ -269,7 +272,7 @@ struct appealHandleView: View {
     
     func appealList () {
         withAnimation(nil) {
-            isloading = true
+//            isloading = true
         }
         
         let networkService = NetworkService()

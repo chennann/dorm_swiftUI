@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import ExytePopupView
 
 struct dormView: View {
     
@@ -26,6 +27,12 @@ struct dormView: View {
     @State private var quilt = 0
     
     @State private var showCamera = false
+    @State private var showCameraBalcony = false
+    @State private var showCameraRubbish = false
+    @State private var showCameraDesk = false
+    @State private var showCameraFloor = false
+    @State private var showCameraQuilt = false
+    
     @State var balconyImg: UIImage?
     @State var rubbishImg: UIImage?
     @State var deskImg: UIImage?
@@ -201,7 +208,7 @@ struct dormView: View {
                                             Spacer()
                                             Text("扣分依据：")
                                             Button {
-                                                self.showCamera = true
+                                                self.showCameraBalcony = true
                                             } label: {
                                                 
                                                 Image(systemName: "camera.viewfinder")
@@ -213,7 +220,7 @@ struct dormView: View {
                                             Spacer()
                                         }
                                         .padding(.horizontal, 40)
-                                        .fullScreenCover(isPresented: $showCamera) {
+                                        .fullScreenCover(isPresented: $showCameraBalcony) {
                                             CameraView(image: self.$balconyImg)
                                                 .onDisappear(perform: {
                                                     
@@ -281,7 +288,7 @@ struct dormView: View {
                                             Spacer()
                                             Text("扣分依据：")
                                             Button {
-                                                self.showCamera = true
+                                                self.showCameraRubbish = true
                                             } label: {
                                                 
                                                 Image(systemName: "camera.viewfinder")
@@ -291,7 +298,7 @@ struct dormView: View {
                                             Spacer()
                                         }
                                         .padding(.horizontal, 40)
-                                        .fullScreenCover(isPresented: $showCamera) {
+                                        .fullScreenCover(isPresented: $showCameraRubbish) {
                                             CameraView(image: self.$rubbishImg)
                                                 .onDisappear(perform: {
                                                     
@@ -359,7 +366,7 @@ struct dormView: View {
                                             Spacer()
                                             Text("扣分依据：")
                                             Button {
-                                                self.showCamera = true
+                                                self.showCameraDesk = true
                                             } label: {
                                                 
                                                 Image(systemName: "camera.viewfinder")
@@ -369,7 +376,7 @@ struct dormView: View {
                                             Spacer()
                                         }
                                         .padding(.horizontal, 40)
-                                        .fullScreenCover(isPresented: $showCamera) {
+                                        .fullScreenCover(isPresented: $showCameraDesk) {
                                             CameraView(image: self.$deskImg)
                                                 .onDisappear(perform: {
                                                     
@@ -437,7 +444,7 @@ struct dormView: View {
                                             Spacer()
                                             Text("扣分依据：")
                                             Button {
-                                                self.showCamera = true
+                                                self.showCameraFloor = true
                                             } label: {
                                                 
                                                 Image(systemName: "camera.viewfinder")
@@ -447,7 +454,7 @@ struct dormView: View {
                                             Spacer()
                                         }
                                         .padding(.horizontal, 40)
-                                        .fullScreenCover(isPresented: $showCamera) {
+                                        .fullScreenCover(isPresented: $showCameraFloor) {
                                             CameraView(image: self.$floorImg)
                                                 .onDisappear(perform: {
                                                     
@@ -515,10 +522,10 @@ struct dormView: View {
                                             Spacer()
                                             Text("扣分依据：")
                                             Button {
-                                                self.showCamera = true
+                                                self.showCameraQuilt = true
                                             } label: {
                                                 
-                                                Image(systemName: "plus.viewfinder")
+                                                Image(systemName: "camera.viewfinder")
                                                     .font(.system(size: 30))
                                                     .foregroundColor(Color.gray)
                                             }
@@ -526,7 +533,7 @@ struct dormView: View {
                                             Spacer()
                                         }
                                         .padding(.horizontal, 40)
-                                        .fullScreenCover(isPresented: $showCamera) {
+                                        .fullScreenCover(isPresented: $showCameraQuilt) {
                                             CameraView(image: self.$quiltImg)
                                                 .onDisappear(perform: {
                                                     
@@ -584,10 +591,14 @@ struct dormView: View {
                             Spacer()
                             Button(action: {
                                 addCheck(studentNumber: students[currentStep-1].studentNumber ?? "")
-                                if (currentStep == 4) {
+                                
+                                if (currentStep == students.count) {
                                     withAnimation {
                                         finished = true
                                     }
+                                }
+                                else {
+                                    showToast(content: "✅操作成功")
                                 }
                                 if currentStep < students.count {
                                     withAnimation {
@@ -596,12 +607,12 @@ struct dormView: View {
 
                                     }
                                 }
-
+                                
                             }) {
                                 RoundedRectangle(cornerRadius: 10)
-                                    .fill(RadialGradient(gradient: Gradient(colors: [Color("bgc2"), Color.yellow]), center: .topLeading, startRadius: 0, endRadius: 1700))
+                                    .fill(RadialGradient(gradient: Gradient(colors: [Color.green, Color.yellow]), center: .topLeading, startRadius: 0, endRadius: 1700))
                                     .frame(width: 100, height: 50)
-                                    .shadow(color: Color("bgc2"), radius: 8, x: 0 , y: 5)
+                                    .shadow(color: Color.green, radius: 5, x: 0 , y: 0)
                                     
                                 
                                     .overlay(Image(systemName: "arrowshape.forward.fill")

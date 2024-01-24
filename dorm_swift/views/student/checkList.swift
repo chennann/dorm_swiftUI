@@ -68,7 +68,7 @@ struct checkList: View {
                                             .font(.subheadline)
                                             .foregroundStyle(Color.gray)
                                         Text("\(check.checkValue)分")
-                                            .foregroundStyle(Color.red)
+                                            .foregroundStyle(((check.status)=="申诉成功") ? Color.green : (((check.status)=="申诉失败") ? Color.red : ((check.status)=="申诉中") ? Color.orange : Color.red))
                                     }
                                     HStack {
                                         Text("扣分状态：        ")
